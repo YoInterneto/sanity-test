@@ -1,16 +1,6 @@
 import { createClient } from "@sanity/client";
-import type { PortableTextBlock } from "@portabletext/types";
-import type { ImageAsset, Slug } from "@sanity/types";
-import groq from "groq";
 
-declare global {
-  interface Window {
-    ENV: {
-      SANITY_PROJECT_ID: string;
-      SANITY_DATASET: string;
-    };
-  }
-}
+import groq from "groq";
 
 const { SANITY_PROJECT_ID, SANITY_DATASET } =
   typeof document === "undefined" ? process.env : window.ENV;
@@ -26,13 +16,13 @@ export const client = createClient({
   apiVersion: "2023-03-20", // date of setup
 });
 
-export async function getPosts(): Promise<Post[]> {
+export async function getPosts() {
   return await client.fetch(
     groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
   );
 }
 
-export async function getPost(slug: string): Promise<Post> {
+export async function getPost(slug) {
   return await client.fetch(
     groq`*[_type == "post" && slug.current == $slug][0]`,
     {
@@ -41,12 +31,11 @@ export async function getPost(slug: string): Promise<Post> {
   );
 }
 
-export interface Post {
-  _type: "post";
-  _createdAt: string;
-  title?: string;
-  slug: Slug;
-  excerpt?: string;
-  mainImage?: ImageAsset;
-  body: PortableTextBlock[];
+export async function getPage(slug) {
+  return await client.fetch(
+    groq`*[_type == "page" && slug.current == $slug][0]`,
+    {
+      slug,
+    }
+  );
 }

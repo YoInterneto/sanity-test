@@ -3,17 +3,10 @@ export default function Welcome() {
     <div className="welcome__container">
       <div className="logos">
         <div className="logos__blur"></div>
-        <img
-          className="logos__entry"
-          src="/remix.svg"
-          alt="Remix Logo"
-        />
+        <img className="logos__entry" src="/remix.svg" alt="Remix Logo" />
+
         <span className="logos__plus">+</span>
-        <img
-          className="logos__entry"
-          src="/sanity.svg"
-          alt="Sanity Logo"
-        />
+        <img className="logos__entry" src="/sanity.svg" alt="Sanity Logo" />
       </div>
       <div className="steps">
         <h2 className="steps__title">Next steps</h2>

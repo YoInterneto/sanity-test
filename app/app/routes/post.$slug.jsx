@@ -1,17 +1,19 @@
 import { PortableText } from "@portabletext/react";
-import { type LoaderArgs } from "@remix-run/node";
+
 import { useLoaderData } from "@remix-run/react";
 import { formatDate } from "~/utils";
 import { urlFor } from "~/utils/image";
 import { getPost } from "~/utils/sanity";
 
-export const loader = async ({ params }: LoaderArgs) => {
-  const post = await getPost(params.slug as string);
+export const loader = async ({ params }) => {
+  const post = await getPost(params.slug);
   return post;
 };
 
 export default function PostRoute() {
-  const post = useLoaderData<typeof loader>();
+  const post = useLoaderData();
+
+  console.log(post)
 
   return (
     <section className="post">
@@ -24,6 +26,7 @@ export default function PostRoute() {
       ) : (
         <div className="post__cover--none" />
       )}
+
       <div className="post__container">
         <h1 className="post__title">{post.title}</h1>
         <p className="post__excerpt">{post.excerpt}</p>

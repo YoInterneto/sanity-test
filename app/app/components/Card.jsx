@@ -1,8 +1,7 @@
 import { formatDate } from "~/utils";
 import { urlFor } from "~/utils/image";
-import { type Post } from "~/utils/sanity";
 
-export default function Card({ post }: { post: Post }) {
+export default function Card({ post }) {
   return (
     <div className="card">
       {post.mainImage ? (
@@ -14,12 +13,10 @@ export default function Card({ post }: { post: Post }) {
       ) : (
         <div className="card__cover--none" />
       )}
+
       <div className="card__container">
         <h3 className="card__title">
-          <a
-            className="card__link"
-            href={`/post/${post.slug.current}`}
-          >
+          <a className="card__link" href={`/post/${post.slug.current}`}>
             {post.title}
           </a>
         </h3>

@@ -1,4 +1,4 @@
-import { type LinksFunction, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import styles from "./styles/index.css";
 import {
   Links,
@@ -19,7 +19,7 @@ export const loader = () => {
   });
 };
 
-export const links: LinksFunction = () => {
+export const links = () => {
   return [
     { rel: "stylesheet", href: styles },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,26 +32,21 @@ export const links: LinksFunction = () => {
 };
 
 export default function App() {
-  const { ENV } = useLoaderData<typeof loader>();
+  const { ENV } = useLoaderData();
 
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
         <Meta />
         <Links />
       </head>
       <body>
         <div className="container">
           <header className="header">
-            <a
-              className="header__title"
-              href="/"
-            >
+            <a className="header__title" href="/">
               Remix + Sanity
             </a>
           </header>
@@ -87,6 +82,7 @@ export default function App() {
             __html: `window.ENV = ${JSON.stringify(ENV)}`,
           }}
         />
+
         <Scripts />
         <LiveReload />
       </body>
