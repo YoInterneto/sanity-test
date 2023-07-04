@@ -1,0 +1,18 @@
+import {defineField, defineType} from 'sanity'
+
+export default defineType({
+  name: 'video',
+  type: 'object',
+  title: 'Video',
+  fields: [
+    defineField({
+      name: 'videoLabel',
+      type: 'string',
+    }),
+    defineField({
+      name: 'url',
+      type: 'string',
+      title: 'URL',
+    }),
+  ],
+})

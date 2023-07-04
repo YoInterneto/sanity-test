@@ -1,17 +1,20 @@
 import { useLoaderData } from "@remix-run/react";
 import { getPage } from "~/utils/sanity";
 
+import components from "../utils/components";
+import React from "react";
+
 export const loader = async ({ params }) => {
   let result;
 
-  if(params.slug && params.slug !== ''){
+  if (params.slug && params.slug !== '') {
     result = await getPage(params.slug);
     //result = params.slug;
   }
-  else{
+  else {
     result = await getPosts();
   }
-  
+
   return result;
 };
 
@@ -24,7 +27,14 @@ export default function PostRoute() {
 
   return (
     <section className="page">
-      Page
+      {
+        page.body.map((component) => {
+          return React.createElement(components[component._type], {
+            key: component._key,
+            component
+          });
+        })
+      }
     </section>
   );
 }

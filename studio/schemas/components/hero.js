@@ -1,30 +1,44 @@
 import { defineField, defineType } from "sanity";
-import component from "../component";
+import {DocumentTextIcon} from '@sanity/icons'
 
 export default defineType({
-	name: "hero",
-	title: "Hero",
-	type: "object",
+	name: 'hero',
+	type: 'object',
+	title: 'Hero',
 	fields: [
-        ...component.fields,
 		defineField({
-			name: "text",
-			title: "Text",
-			type: "string",
+			name: 'heading',
+			type: 'string',
 		}),
 		defineField({
-			name: "type",
-			title: "Type",
-			type: "string",
+			name: 'tagline',
+			type: 'string',
 		}),
-        defineField({
-            name: "bgImage",
-            title: "Background image",
-            type: "image",
-            options: {
-                hotspot: true,
-            },
-        }),
+		defineField({
+			name: 'image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alternative text',
+				}),
+			],
+		}),
 	],
-});
-
+	icon: DocumentTextIcon,
+	preview: {
+		select: {
+			title: 'heading',
+			image: 'image',
+		},
+		prepare({ title, image }) {
+			return {
+				title: title || 'Untitled',
+				subtitle: 'Hero',
+				media: image || DocumentTextIcon,
+			}
+		},
+	},
+})

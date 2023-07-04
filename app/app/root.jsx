@@ -1,5 +1,6 @@
 import { json } from "@remix-run/node";
 import styles from "./styles/index.css";
+import components from "./styles/component.css";
 import {
   Links,
   LiveReload,
@@ -22,6 +23,7 @@ export const loader = () => {
 export const links = () => {
   return [
     { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: components },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     { rel: "preconnect", href: "https://fonts.gstatic.com" },
     {

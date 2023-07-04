@@ -7,16 +7,52 @@ export default defineType({
 	name: "page",
 	title: "Pages",
 	type: "document",
+	groups: [
+		{
+		name: 'seo',
+		title: 'SEO',
+	},
+	{
+		name: 'content',
+		title: 'Content',
+	},
+	],
 	fields: [
+		defineField({
+			name: "seoTitle",
+			title: "SEO Title",
+			type: "string",
+			group: 'seo',
+		}),
+		defineField({
+			name: "keywords",
+			title: "Keywords",
+			type: "string",
+			group: 'seo',
+		}),
+		defineField({
+			name: "seoImage",
+			title: "SEO Image",
+			type: "image",
+			group: 'seo',
+		}),
+		defineField({
+			name: "description",
+			title: "Description",
+			type: "string",
+			group: 'seo',
+		}),
 		defineField({
 			name: "title",
 			title: "Title",
 			type: "string",
+			group: 'content',
 		}),
 		defineField({
 			name: "slug",
 			title: "Slug",
 			type: "slug",
+			group: 'content',
 			validation: (Rule) => Rule.required(),
 			options: {
 				source: "title",
@@ -27,11 +63,13 @@ export default defineType({
 			name: "theme",
 			title: "Theme",
 			type: "string",
+			group: 'content',
 		}),
 		defineField({
 			name: 'body',
 			title: 'Body (components)',
 			type: 'array',
+			group: 'content',
 			of: [
 				defineArrayMember({
 					name: 'hero',
@@ -52,11 +90,6 @@ export default defineType({
 				defineArrayMember({
 					name: 'video',
 					type: 'video',
-				}),
-				defineArrayMember({
-					name: 'callToAction',
-					type: 'reference',
-					to: [{ type: 'promotion' }],
 				}),
 			],
 		}),
